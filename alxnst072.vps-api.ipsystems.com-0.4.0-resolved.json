@@ -1,0 +1,4821 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "ISPsystem vm API",
+    "version": "0.4.0",
+    "title": "ISPsystem vm API"
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/gamesense.is/is-psystem_vm_api/3.0.0",
+  "tags": [
+    {
+      "name": "cluster",
+      "description": "Кластеры"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/node/{node_id}/hetzner_ip": {
+      "get": {
+        "tags": [
+          "hetzner_node"
+        ],
+        "summary": "Список Ip адресов узла вместе с подсетями и ВМ",
+        "operationId": "ip_list",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список Ip адресов узла успешно получен",
+            "schema": {
+              "$ref": "#/definitions/HetznerNodeIpList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "hetzner_node"
+        ],
+        "summary": "Добавление Ip адресов на узел",
+        "operationId": "add_ip",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "AddHetznerIpParams",
+            "description": "Параметры добавляемых IP адресов",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddHetznerIpParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ip адреса успешно добавлены на узел",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/hetzner_ip/{hetzner_ip_id}": {
+      "delete": {
+        "tags": [
+          "hetzner_ip"
+        ],
+        "summary": "Удаление IP адреса",
+        "description": "Удаление IP адреса",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "hetzner_ip_id",
+            "in": "path",
+            "description": "ID удаляемого IP адреса",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/hetzner_subnet/{hetzner_subnet_id}": {
+      "delete": {
+        "tags": [
+          "hetzner_subnet"
+        ],
+        "summary": "Удаление подсети",
+        "description": "Удаление подсети",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "hetzner_subnet_id",
+            "in": "path",
+            "description": "ID удаляемой подсети",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/host": {
+      "get": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/HostList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Создание ВМ",
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "HostParams",
+            "description": "Параметры создаваемой ВМ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ВМ успешно создана",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_1"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}": {
+      "get": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_2"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Редактирование ВМ",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID редактируемой ВМ",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostChangeParams",
+            "description": "Параметры для редактирования ВМ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostChangeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ВМ успешно отредактирована",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Удаление ВМ",
+        "description": "Удаление хоста",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID удаляемого хоста",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/start": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "start",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/resource": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "description": "Изменение параметров Хоста",
+        "operationId": "edit_resource",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostResourceParams",
+            "description": "Параметры для изменения хоста",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostResourceParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/password": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "change_password",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostChangePasswordParams",
+            "description": "Параметры для смены пароля",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostChangePasswordParams"
+            }
+          }
+        ]
+      }
+    },
+    "/host/{host_id}/stop": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "stop",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/restart": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "restart",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/migrate": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "migrate",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostMigrateParams",
+            "description": "Параметры миграции",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostMigrateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/clone": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "clone",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/account": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "change_account",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID хоста",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostAccountParams",
+            "description": "Параметры смены владельца",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostAccountParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/ssh_key": {
+      "get": {
+        "tags": [
+          "ssh_key"
+        ],
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SshKeysList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ssh_key"
+        ],
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "SshKeyCreateParams",
+            "description": "Параметры для добавления ssh-ключа",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SshKeyCreateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/cluster/{cluster_id}/ssh_key": {
+      "post": {
+        "tags": [
+          "cluster_ssh_key"
+        ],
+        "operationId": "ssh_key",
+        "parameters": [
+          {
+            "name": "cluster_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "SshKeyClusterParams",
+            "description": "Параметры для подключения ssh-ключей к кластеру",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SshKeyClusterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "ssh_key/{ssh_key_id}": {
+      "delete": {
+        "tags": [
+          "ssh_key"
+        ],
+        "summary": "Удаление ssh-ключа",
+        "description": "Удаление ssh-ключа",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "ssh_key_id",
+            "in": "path",
+            "description": "ID удаляемого ssh-ключа",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/os": {
+      "get": {
+        "tags": [
+          "os"
+        ],
+        "summary": "Список ОС",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список ОС успешно получен",
+            "schema": {
+              "$ref": "#/definitions/OSList"
+            }
+          }
+        }
+      }
+    },
+    "/os/{id}": {
+      "post": {
+        "tags": [
+          "os"
+        ],
+        "summary": "Редактирование ОС",
+        "description": "Редактирование Ос",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID редактируемой ОС",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "OSEditParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OSEditParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_5"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "os"
+        ],
+        "summary": "Удаление ОС",
+        "description": "Удаление ОС",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID удаляемой ОС",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ОС успешно удалена",
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/rescue_mode": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "rescue_mode",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostRescueModeParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostRescueModeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/task": {
+      "get": {
+        "tags": [
+          "task"
+        ],
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
+          }
+        }
+      }
+    },
+    "/task/{task_id}/delete": {
+      "delete": {
+        "tags": [
+          "task"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/recipe": {
+      "get": {
+        "tags": [
+          "recipe"
+        ],
+        "summary": "Список рецептов",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/RecipeList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "recipe"
+        ],
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "RecipeParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecipeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/recipe/{recipe_id}": {
+      "get": {
+        "tags": [
+          "recipe"
+        ],
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "recipe_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_6"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "recipe"
+        ],
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "recipe_id",
+            "in": "path",
+            "description": "ID редактируемого скрипта",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "RecipeUpdateParams",
+            "description": "Параметры для редактирования скрипта",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecipeUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Скрипт успешно отредактирован",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "recipe"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "recipe_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/repository": {
+      "get": {
+        "tags": [
+          "repository"
+        ],
+        "summary": "Список репозиториев кластера",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список репозиториев успешно получен",
+            "schema": {
+              "$ref": "#/definitions/RepoList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "repository"
+        ],
+        "summary": "Создание репозитория",
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "RepositoryParams",
+            "description": "Параметры создаваемого репозитория",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RepositoryParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Репозиторий успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_5"
+            }
+          }
+        }
+      }
+    },
+    "/repository/{id}": {
+      "get": {
+        "tags": [
+          "repository"
+        ],
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID репозитория",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_6"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "repository"
+        ],
+        "summary": "Удаление репозитория",
+        "description": "Удаление узла кластера",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID удаляемого репозитория",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Репозиторий успешно удален",
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/node/{node_id}/cert": {
+      "post": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Обновление libvirt сертификатов на узле",
+        "description": "Обновление libvirt сертификатов на узле",
+        "operationId": "update_certificates",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID узла для обновления сертификатов",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/ippool/{ippool_id}/cluster": {
+      "get": {
+        "tags": [
+          "ippool_cluster"
+        ],
+        "description": "Список кластеров к котром подключен пул",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "ippool_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/IppoolClusterList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ippool_cluster"
+        ],
+        "description": "Подключение пула к кластерам",
+        "operationId": "cluster",
+        "parameters": [
+          {
+            "name": "ippool_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "IppoolClusterParams",
+            "description": "Параметры подключения пула к кластерам",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IppoolClusterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    "/account": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Список аккаунтов",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список аккаунтов успешно получен",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Создание аккаунта",
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "AccountParams",
+            "description": "Параметры создаваемого аккаунта",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Аккаунт успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/invite": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Приглашение пользователя",
+        "operationId": "invite",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "InviteParams",
+            "description": "Параметры приглашаемого пользователя",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InviteParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Приглашение отправлено",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/user/{user_id}": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Удаление пользователя",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID удаляемого пользователя",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь удалён",
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/user/{user_id}/suspend": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Блокировка пользователя",
+        "operationId": "invite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID пользователя",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь заблокирован",
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/user/{user_id}/resume": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Разблокировка пользователя",
+        "operationId": "invite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID пользователя",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пользователь разблокирован",
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/host/{id}/runrecipe": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "runrecipe",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostRunRecipeParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostRunRecipeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_7"
+            }
+          }
+        }
+      }
+    },
+    "/settings/smtp": {
+      "get": {
+        "tags": [
+          "smtp"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_8"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "smtp"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "SmtpParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SmtpParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/cluster": {
+      "get": {
+        "tags": [
+          "cluster"
+        ],
+        "summary": "Список кластеров",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "Авторизация в куки ses6=XXXXXX",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список кластеров успешно получен",
+            "schema": {
+              "$ref": "#/definitions/ClusterList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cluster"
+        ],
+        "summary": "Создание кластера",
+        "operationId": "add",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "Авторизация в куки ses6=XXXXXXX",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "ClusterParams",
+            "description": "Параметры создаваемого кластера",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Кластер успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/cluster/{id}": {
+      "get": {
+        "tags": [
+          "cluster"
+        ],
+        "summary": "Кластер",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID кластера",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_9"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cluster"
+        ],
+        "summary": "Редактирование кластера",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID кластера",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "ClusterEditParams",
+            "description": "Параметры кластера",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterEditParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cluster"
+        ],
+        "summary": "Удаление кластера",
+        "description": "Удаление кластера",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID удаляемого кластера",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Кластер успешно удален",
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/cluster/{cluster_id}/ippool": {
+      "post": {
+        "tags": [
+          "cluster"
+        ],
+        "description": "Подключение/отключение пулов к кластеру",
+        "operationId": "ippool",
+        "parameters": [
+          {
+            "name": "cluster_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "ClusterIppoolParams",
+            "description": "Параметры подключения пулов к кластеру",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterIppoolParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    "/preset": {
+      "get": {
+        "tags": [
+          "preset"
+        ],
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/PresetList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "preset"
+        ],
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "PresetParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PresetParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/preset/{id}": {
+      "delete": {
+        "tags": [
+          "preset"
+        ],
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Id"
+            }
+          }
+        }
+      }
+    },
+    "/node_script": {
+      "get": {
+        "tags": [
+          "node_script"
+        ],
+        "summary": "Список скриптов",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список скриптов успешно получен",
+            "schema": {
+              "$ref": "#/definitions/NodeScriptList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "node_script"
+        ],
+        "summary": "Создание скрипта для узла кластера",
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "NodeScriptCreateParams",
+            "description": "Параметры скрипта",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeScriptParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Скрипт успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      }
+    },
+    "/node_script/{node_script_id}": {
+      "get": {
+        "tags": [
+          "node_script"
+        ],
+        "summary": "Скрипт для узла кластера",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "node_script_id",
+            "in": "path",
+            "description": "ID редактируемого скрипта",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Скрипт для узла кластера успешно получен",
+            "schema": {
+              "$ref": "#/definitions/NodeScriptParams"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "node_script"
+        ],
+        "summary": "Редактирование скрипта для узла кластера",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "NodeScriptEditParams",
+            "description": "Параметры скрипта",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeScriptParams"
+            }
+          },
+          {
+            "name": "node_script_id",
+            "in": "path",
+            "description": "ID редактируемого скрипта",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "node_script"
+        ],
+        "summary": "Удаление скрипта для узла кластера",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "node_script_id",
+            "in": "path",
+            "description": "ID редактируемого скрипта",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Скрипт для узла кластера успешно удалён",
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/set_license": {
+      "post": {
+        "tags": [
+          "license"
+        ],
+        "summary": "Сохранение данных о лицензии",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "LicenseEditParams",
+            "description": "Лицензия",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/License"
+            }
+          }
+        ]
+      }
+    },
+    "/get_license": {
+      "get": {
+        "tags": [
+          "license"
+        ],
+        "summary": "Получение данных о лицензии",
+        "operationId": "get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LicenseData"
+            }
+          }
+        }
+      }
+    },
+    "/host/{id}/bill_option/image_gib": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "set_image_gib_limit",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostBillOptionImageGib",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostBillOptionImageGib"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_10"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/iso/mount": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Подключение ISO к ВМ",
+        "operationId": "iso_mount",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostIsoMountParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostIsoMountParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/iso/finish": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Отключение ISO от ВМ с переустановкой",
+        "operationId": "iso_finish",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/iso/cancel": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Отключение ISO от ВМ без переустановки",
+        "operationId": "iso_cancel",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "EmptyParams",
+            "description": "Пустые параметры",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmptyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/ippool": {
+      "get": {
+        "tags": [
+          "ippool"
+        ],
+        "summary": "Список пулов ip адресов",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "Параметр сортировки пулов",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список пулов ip адресов успешно получен",
+            "schema": {
+              "$ref": "#/definitions/IppoolList"
+            }
+          }
+        }
+      }
+    },
+    "/ippool/{id}": {
+      "delete": {
+        "tags": [
+          "ippool"
+        ],
+        "summary": "Удаление пула ip адресов",
+        "description": "Удаление пула ip адресов",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID удаляемого пула ip адресов",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Пул ip адресов успешно удален",
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/host/{id}/reinstall": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "reinstall",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostReinstallParams",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostReinstallParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_1"
+            }
+          }
+        }
+      }
+    },
+    "/disk/{id}": {
+      "post": {
+        "tags": [
+          "disk"
+        ],
+        "operationId": "resize",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "DiskResizeParams",
+            "description": "Параметры для изменения диска",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiskResizeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/node": {
+      "get": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Список узлов кластера",
+        "operationId": "list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список узлов кластеров успешно получен",
+            "schema": {
+              "$ref": "#/definitions/NodeList"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Создание узла кластера",
+        "operationId": "add",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "NodeParams",
+            "description": "Параметры создаваемого узла кластера",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Узел кластера успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/node/{node_id}": {
+      "get": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Содержимое узла кластера",
+        "description": "Содержимое узла кластера",
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID узла кластера",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_11"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "node"
+        ],
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID редактируемого узла",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "NodeUpdateParams",
+            "description": "Параметры для редактирования узла",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodeUpdateParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Узел успешно отредактирован",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_3"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Удаление узла кластера",
+        "description": "Удаление узла кластера",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID удаляемого узла кластера",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/node/{node_id}/files": {
+      "get": {
+        "tags": [
+          "node_files"
+        ],
+        "summary": "Получение списка файлов с узла",
+        "operationId": "files_list",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID запрашиваемого узла",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список файлов с узла успешно получен",
+            "schema": {
+              "$ref": "#/definitions/NodeFileList"
+            }
+          }
+        }
+      }
+    },
+    "/node/{node_id}/run_script": {
+      "post": {
+        "tags": [
+          "node"
+        ],
+        "summary": "Запуск скрипта на узле",
+        "operationId": "run_script",
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "description": "ID узла",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "node_run_script_params",
+            "description": "Параметры запускаемого скрипта",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/node_run_script_params"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Скрипт успешно запущен",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/image/create": {
+      "post": {
+        "tags": [
+          "host image"
+        ],
+        "summary": "Создание образа ВМ",
+        "operationId": "add",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "Авторизация в куки ses6=XXXXXXX",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID ВМ из которой создаётся образ",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "HostImageParams",
+            "description": "Параметры создаваемого образа ВМ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HostImageParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Образ ВМ успешно создан",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/image": {
+      "get": {
+        "tags": [
+          "host image"
+        ],
+        "summary": "Список образов ВМ",
+        "operationId": "list",
+        "parameters": [
+          {
+            "name": "Cookie",
+            "in": "header",
+            "description": "Авторизация в куки ses6=XXXXXX",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Список образов ВМ успешно получен",
+            "schema": {
+              "$ref": "#/definitions/HostImageList"
+            }
+          }
+        }
+      }
+    },
+    "/image/{image_id}": {
+      "get": {
+        "tags": [
+          "host image"
+        ],
+        "operationId": "get",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_12"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "host image"
+        ],
+        "summary": "Редактирование образа ВМ",
+        "operationId": "edit",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "description": "ID редактируемого образа ВМ",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "ImageChangeParams",
+            "description": "Параметры для редактирования образа",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageChangeParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Образ ВМ успешно отредактирован",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "host image"
+        ],
+        "summary": "Удаление образа ВМ",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "description": "ID удаляемого образа ВМ",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Образ ВМ успешно удалён",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/image/{image_id}/copy": {
+      "post": {
+        "tags": [
+          "host image"
+        ],
+        "summary": "Копирование образа ВМ",
+        "operationId": "copy",
+        "parameters": [
+          {
+            "name": "image_id",
+            "in": "path",
+            "description": "ID образа ВМ",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "ImageCopyParams",
+            "description": "Параметры для копирования образа",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageCopyParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Образ ВМ успешно скопирован",
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/ip": {
+      "get": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "ip_list",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Список IP адресов",
+            "schema": {
+              "$ref": "#/definitions/IpList"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/ip": {
+      "post": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "add_ip",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "AddIpParams",
+            "description": "Параметры добавляемых IP адресов",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddIpParams"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_13"
+            }
+          }
+        }
+      }
+    },
+    "/ip/{ip_id}": {
+      "delete": {
+        "tags": [
+          "host"
+        ],
+        "summary": "Удаление IP адреса",
+        "description": "Удаление IP адреса",
+        "operationId": "delete_ip",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "description": "ID ВМ",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "ip_id",
+            "in": "path",
+            "description": "ID удаляемого IP адреса",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_4"
+            }
+          }
+        }
+      }
+    },
+    "/host/{host_id}/history": {
+      "get": {
+        "tags": [
+          "host"
+        ],
+        "operationId": "get_host_history",
+        "parameters": [
+          {
+            "name": "host_id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/inline_response_200_14"
+            }
+          }
+        }
+      }
+    },
+    "/user_limits": {
+      "get": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UserLimits"
+            }
+          }
+        }
+      }
+    },
+    "/user_limits/role/{role_name}": {
+      "get": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "get_for_role",
+        "parameters": [
+          {
+            "name": "role_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UserLimitsAdmin"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "add_for_role",
+        "parameters": [
+          {
+            "name": "role_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user_limits_params",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLimitsAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "delete_for_role",
+        "parameters": [
+          {
+            "name": "role_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    },
+    "/user_limits/account/{account_name}": {
+      "get": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "get_for_account",
+        "parameters": [
+          {
+            "name": "account_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UserLimitsAdmin"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "add_for_account",
+        "parameters": [
+          {
+            "name": "account_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "user_limits_params",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserLimitsAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user_limits"
+        ],
+        "operationId": "delete_for_account",
+        "parameters": [
+          {
+            "name": "account_name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Deleted"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HetznerNodeIpList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HetznerNodeIpList_list"
+          }
+        },
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "SubnetWithUsedIp": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "subnet": {
+          "type": "string"
+        },
+        "used_ip": {
+          "type": "integer"
+        }
+      }
+    },
+    "HostParams": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "cluster": {
+          "type": "integer"
+        },
+        "node": {
+          "type": "integer"
+        },
+        "account": {
+          "type": "integer"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "preset": {
+          "type": "number"
+        },
+        "os": {
+          "type": "integer"
+        },
+        "image": {
+          "type": "integer"
+        },
+        "recipe": {
+          "type": "integer"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 6
+        },
+        "comment": {
+          "type": "string"
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "hdd_mib": {
+          "type": "integer"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "ip_addr": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "ipv4"
+          },
+          "minItems": 1
+        },
+        "ipv6_pool": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1
+        },
+        "ipv6_enabled": {
+          "type": "boolean"
+        },
+        "ipv4_pool": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 1
+        },
+        "ipv4_number": {
+          "type": "integer"
+        },
+        "cpu_mode": {
+          "type": "string",
+          "enum": [
+            "host-model",
+            "host-passthrough",
+            "custom"
+          ]
+        },
+        "mac_address": {
+          "type": "string",
+          "minLength": 17,
+          "maxLength": 17
+        },
+        "anti_spoofing": {
+          "type": "boolean"
+        },
+        "used_time": {
+          "type": "string",
+          "enum": [
+            "utc",
+            "localtime"
+          ]
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostParams_interfaces"
+          }
+        }
+      },
+      "title": "Host",
+      "description": "Создание ВМ"
+    },
+    "HostList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Host"
+          }
+        }
+      }
+    },
+    "Host": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ip4": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Host_ip4"
+          }
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Host_interfaces"
+          }
+        },
+        "node": {
+          "type": "object",
+          "properties": {}
+        },
+        "cluster": {
+          "type": "object",
+          "properties": {}
+        },
+        "state": {
+          "type": "string"
+        },
+        "account": {
+          "type": "integer"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "disk": {
+          "$ref": "#/definitions/Host_disk"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "cpu_number_new": {
+          "type": "integer"
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "ram_mib_new": {
+          "type": "integer"
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "net_bandwidth_mbitps_changed": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "os_name": {
+          "type": "string"
+        },
+        "os_group": {
+          "type": "string"
+        },
+        "uptime": {
+          "type": "integer"
+        },
+        "rescue_mode": {
+          "type": "boolean"
+        },
+        "iso_mounted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "HostResourceParams": {
+      "type": "object",
+      "properties": {
+        "cpu_number": {
+          "type": "integer"
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "defer": {
+          "$ref": "#/definitions/HostResourceParams_defer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostChangeParams": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "format": "vmname",
+          "maxLength": 240
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SshKeysList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SshKeysList_list"
+          }
+        }
+      }
+    },
+    "OSList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OS"
+          }
+        }
+      }
+    },
+    "OS": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterInOS"
+          }
+        },
+        "repository": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "adminonly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ClusterInOS": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        }
+      }
+    },
+    "OSEditParams": {
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "adminonly": {
+          "type": "boolean"
+        }
+      }
+    },
+    "TaskList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "consul_id": {
+          "type": "integer"
+        },
+        "defer_reason": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "RecipeParams": {
+      "type": "object",
+      "required": [
+        "description",
+        "name",
+        "script",
+        "tags"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 6,
+          "default": "helloworld"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "default": "helloworld"
+        },
+        "script": {
+          "type": "string",
+          "default": "echo \"Hello world\" > /root/greeting"
+        },
+        "for_all": {
+          "type": "boolean"
+        },
+        "account": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "RecipeUpdateParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 6
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        },
+        "autoupdate": {
+          "type": "boolean"
+        },
+        "state": {
+          "type": "string"
+        },
+        "from_repository": {
+          "type": "boolean"
+        },
+        "for_all": {
+          "type": "boolean"
+        },
+        "account": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "RecipeList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        }
+      }
+    },
+    "Recipe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "repository": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "for_all": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RepoList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Repo"
+          }
+        }
+      }
+    },
+    "Repo": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "RepositoryParams": {
+      "type": "object",
+      "required": [
+        "name",
+        "url"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "repo-os"
+        },
+        "url": {
+          "type": "string",
+          "default": "http://localhost:8000"
+        }
+      },
+      "title": "Repository",
+      "description": "Repository create",
+      "additionalProperties": {}
+    },
+    "IppoolClusterParams": {
+      "type": "object",
+      "required": [
+        "clusters"
+      ],
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IppoolClusterParams_clusters"
+          }
+        }
+      },
+      "description": "Список кластеров к которым подключается пул",
+      "additionalProperties": {}
+    },
+    "IppoolClusterList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IppoolCluster"
+          }
+        }
+      }
+    },
+    "IppoolCluster": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "interface": {
+          "type": "integer"
+        }
+      }
+    },
+    "AccountList": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "host_count": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        },
+        "role": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inline_response_200_6"
+          }
+        }
+      }
+    },
+    "AccountParams": {
+      "type": "object",
+      "required": [
+        "email",
+        "password",
+        "role"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "phone_number": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "InviteParams": {
+      "type": "object",
+      "required": [
+        "email",
+        "role"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "role": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostRunRecipeParams": {
+      "type": "object",
+      "required": [
+        "recipe"
+      ],
+      "properties": {
+        "recipe": {
+          "type": "integer"
+        }
+      }
+    },
+    "SmtpParams": {
+      "type": "object",
+      "required": [
+        "address",
+        "port"
+      ],
+      "properties": {
+        "address": {
+          "type": "string",
+          "format": "uri"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "login": {
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "type": "string"
+        },
+        "use_ssl": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "ClusterList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      }
+    },
+    "Cluster": {
+      "type": "object",
+      "properties": {
+        "cpu_number": {
+          "$ref": "#/definitions/TotalUsed"
+        },
+        "host_count": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "ram_mib": {
+          "$ref": "#/definitions/TotalUsed"
+        },
+        "storage_mib": {
+          "$ref": "#/definitions/TotalUsed"
+        },
+        "time_zone": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "data_center": {
+          "type": "string"
+        },
+        "node_count": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      }
+    },
+    "ClusterSettings": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "model": {
+          "$ref": "#/definitions/ClusterSettings_model"
+        }
+      }
+    },
+    "ClusterParams": {
+      "type": "object",
+      "required": [
+        "name",
+        "storage",
+        "virtualization_type"
+      ],
+      "properties": {
+        "virtualization_type": {
+          "type": "string",
+          "default": "dummy",
+          "enum": [
+            "dummy",
+            "kvm",
+            "vmmgr"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "default": "cl1"
+        },
+        "comment": {
+          "type": "string",
+          "default": ""
+        },
+        "iso_enabled": {
+          "type": "boolean"
+        },
+        "time_zone": {
+          "type": "string",
+          "default": "UTC"
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterParams_interfaces"
+          }
+        },
+        "os": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "storage": {
+          "$ref": "#/definitions/ClusterParams_storage"
+        },
+        "datacenter_type": {
+          "type": "string",
+          "default": "common",
+          "enum": [
+            "common",
+            "hetzner"
+          ]
+        },
+        "os_storage_path": {
+          "type": "string",
+          "default": "/share"
+        },
+        "image_storage_path": {
+          "type": "string",
+          "default": "/images"
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      },
+      "title": "Create cluster",
+      "description": "Create cluster validation schema",
+      "additionalProperties": {}
+    },
+    "ClusterEditParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "iso_enabled": {
+          "type": "boolean"
+        },
+        "time_zone": {
+          "type": "string",
+          "default": "UTC"
+        },
+        "os": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "net_bandwidth_mbitps": {
+          "type": "integer"
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      },
+      "title": "Edit cluster",
+      "description": "Edit cluster validation schema",
+      "additionalProperties": {}
+    },
+    "ClusterIppoolParams": {
+      "type": "object",
+      "required": [
+        "interfaces"
+      ],
+      "properties": {
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClusterParams_interfaces"
+          }
+        }
+      },
+      "description": "Список пулов подключенных к кластеру",
+      "additionalProperties": {}
+    },
+    "PresetParams": {
+      "type": "object",
+      "required": [
+        "cpu_number",
+        "hdd_mib",
+        "name",
+        "ram_mib"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "hdd_mib": {
+          "type": "integer"
+        },
+        "cpu_number": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "PresetList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Preset"
+          }
+        }
+      }
+    },
+    "Preset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "hdd_mib": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodeScriptList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeScriptParams"
+          }
+        }
+      }
+    },
+    "NodeScriptParams": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 255
+        },
+        "script": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "shell",
+            "ansible"
+          ]
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "autorun": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "account": {
+          "$ref": "#/definitions/NodeScriptParams_account"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/NodeScriptParams_updated_at"
+        }
+      }
+    },
+    "License": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "LicenseData": {
+      "type": "object",
+      "properties": {
+        "host_limit": {
+          "type": "integer"
+        },
+        "host_limit_exceeded": {
+          "type": "boolean"
+        },
+        "license": {
+          "$ref": "#/definitions/LicenseData_license"
+        },
+        "node_limit": {
+          "type": "integer"
+        },
+        "node_limit_exceeded": {
+          "type": "boolean"
+        },
+        "last_notify": {
+          "type": "integer"
+        }
+      }
+    },
+    "HostBillOptionImageGib": {
+      "type": "object",
+      "required": [
+        "image_gib"
+      ],
+      "properties": {
+        "image_gib": {
+          "type": "integer"
+        }
+      }
+    },
+    "IppoolList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ippool"
+          }
+        }
+      }
+    },
+    "Ippool": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "total_ip": {
+          "type": "string"
+        },
+        "using_ip": {
+          "type": "string"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inline_response_200_6"
+          }
+        }
+      }
+    },
+    "IppoolParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "test_name"
+        },
+        "range": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "iprange",
+            "default": "1.1.1.1-1.1.1.10"
+          }
+        }
+      }
+    },
+    "IppoolEditParams": {
+      "type": "object",
+      "properties": {
+        "auto_selection_allowed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "HostReinstallParams": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "integer"
+        },
+        "image": {
+          "type": "integer"
+        },
+        "recipe": {
+          "type": "integer"
+        },
+        "password": {
+          "type": "string",
+          "minLength": 6
+        }
+      }
+    },
+    "NodeUpdateParams": {
+      "type": "object",
+      "properties": {
+        "host_creation_blocked": {
+          "type": "boolean"
+        },
+        "open_vswitch": {
+          "type": "boolean"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      },
+      "title": "Node edit",
+      "description": "Node edit schema"
+    },
+    "NodeParams": {
+      "type": "object",
+      "required": [
+        "cluster",
+        "host_max",
+        "ip",
+        "name",
+        "password",
+        "ssh_port"
+      ],
+      "properties": {
+        "cluster": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string",
+          "default": "node1"
+        },
+        "ip": {
+          "type": "string",
+          "default": "1.1.1.123"
+        },
+        "ssh_port": {
+          "type": "integer"
+        },
+        "host_max": {
+          "type": "integer"
+        },
+        "password": {
+          "type": "string",
+          "default": "password"
+        },
+        "comment": {
+          "type": "string",
+          "default": "comment"
+        },
+        "hetzner_ip": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeParams_interfaces"
+          }
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      },
+      "title": "Create node",
+      "description": "Create node validation schema",
+      "additionalProperties": {}
+    },
+    "NodeList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node"
+          }
+        }
+      }
+    },
+    "Node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "cluster": {
+          "$ref": "#/definitions/ClusterInNodeList"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "storage_mib": {
+          "$ref": "#/definitions/TotalUsed"
+        },
+        "ram_mib": {
+          "$ref": "#/definitions/TotalUsed"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Node_interfaces"
+          }
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      }
+    },
+    "ClusterInNodeList": {
+      "type": "object",
+      "properties": {
+        "data_center": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "time_zone": {
+          "type": "string"
+        }
+      },
+      "title": "ClusterInNodeList"
+    },
+    "NodeFileList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeFile"
+          }
+        },
+        "size": {
+          "type": "integer"
+        }
+      },
+      "title": "NodeFiles"
+    },
+    "NodeFile": {
+      "type": "object",
+      "properties": {
+        "entity_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "node": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "size_mib": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "HostImageParams": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "account": {
+          "type": "integer"
+        },
+        "for_all": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostImageList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostImage"
+          }
+        }
+      }
+    },
+    "ImageChangeParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "account": {
+          "type": "integer"
+        },
+        "for_all": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "account": {
+          "type": "string"
+        },
+        "for_all": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeInImage"
+          }
+        }
+      }
+    },
+    "NodeInImage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ip_addr": {
+          "type": "string"
+        },
+        "ssh_port": {
+          "type": "integer"
+        }
+      },
+      "title": "NodeInImageList"
+    },
+    "AddIpParams": {
+      "type": "object",
+      "properties": {
+        "ip_addr": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "ipv6_pool": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1
+        },
+        "ipv6_enabled": {
+          "type": "boolean"
+        },
+        "ipv4_pool": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 1
+        },
+        "ipv4_number": {
+          "type": "number"
+        },
+        "interfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HostParams_interfaces"
+          }
+        }
+      },
+      "title": "Add IP",
+      "description": "Добавление IP адреса",
+      "additionalProperties": {}
+    },
+    "IpList": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Ip"
+          }
+        },
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "Ip": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "ip_addr": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "mask": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "family": {
+          "type": "integer"
+        },
+        "ippool": {
+          "type": "integer"
+        },
+        "network": {
+          "type": "integer"
+        },
+        "host": {
+          "$ref": "#/definitions/inline_response_200_6"
+        },
+        "cluster_interface": {
+          "type": "integer"
+        }
+      }
+    },
+    "UserLimits": {
+      "type": "object",
+      "properties": {
+        "last_notify": {
+          "$ref": "#/definitions/LastNotify"
+        }
+      }
+    },
+    "UserLimitsAdmin": {
+      "type": "object",
+      "properties": {
+        "host_count": {
+          "type": "integer"
+        },
+        "image_count": {
+          "type": "integer"
+        },
+        "image_count_total": {
+          "type": "integer"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "cpu_number_total": {
+          "type": "integer"
+        },
+        "ram_mib": {
+          "type": "integer"
+        },
+        "ram_mib_total": {
+          "type": "integer"
+        },
+        "hdd_mib": {
+          "type": "integer"
+        },
+        "hdd_mib_total": {
+          "type": "integer"
+        },
+        "ipv4_number": {
+          "type": "integer"
+        },
+        "ipv4_number_total": {
+          "type": "integer"
+        }
+      }
+    },
+    "Id": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      }
+    },
+    "IdName": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "IpWithState": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "ip_addr": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "Deleted": {
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Id"
+          }
+        }
+      }
+    },
+    "LastNotify": {
+      "type": "integer"
+    },
+    "EmptyParams": {
+      "type": "object",
+      "title": "EmptyParams",
+      "description": "EmptyParams for post",
+      "additionalProperties": {}
+    },
+    "TotalUsed": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer"
+        },
+        "used": {
+          "type": "integer"
+        }
+      }
+    },
+    "AddHetznerIpParams": {
+      "type": "object",
+      "properties": {
+        "hetzner_ip": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "ipnet"
+          }
+        }
+      }
+    },
+    "inline_response_200": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "task": {
+          "type": "integer"
+        },
+        "recipe_task": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_2": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "cpu_number": {
+          "type": "integer"
+        },
+        "ram_mib": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_3": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_4": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "task": {
+          "type": "integer"
+        }
+      }
+    },
+    "HostChangePasswordParams": {
+      "type": "object",
+      "required": [
+        "password"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "minLength": 6
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostMigrateParams": {
+      "type": "object",
+      "required": [
+        "node"
+      ],
+      "properties": {
+        "node": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "HostAccountParams": {
+      "type": "object",
+      "required": [
+        "account"
+      ],
+      "properties": {
+        "account": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "SshKeyCreateParams": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "ssh_key": {
+          "type": "string"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "SshKeyClusterParams": {
+      "type": "object",
+      "properties": {
+        "ssh_keys": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "inline_response_200_5": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "HostRescueModeParams": {
+      "type": "object",
+      "properties": {
+        "rescue_mode": {
+          "type": "boolean"
+        }
+      }
+    },
+    "inline_response_200_6": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "inline_response_200_7": {
+      "type": "object",
+      "properties": {
+        "task": {
+          "type": "integer"
+        },
+        "recipe_task": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_8": {
+      "type": "object",
+      "properties": {
+        "model": {}
+      }
+    },
+    "inline_response_200_9": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        },
+        "hdd_overselling": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 5
+        }
+      }
+    },
+    "inline_response_200_10": {
+      "type": "object",
+      "properties": {
+        "image_gib": {
+          "type": "integer"
+        }
+      }
+    },
+    "HostIsoMountParams": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "diskid_defer": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": [
+            "host_stop"
+          ]
+        }
+      }
+    },
+    "DiskResizeParams": {
+      "type": "object",
+      "properties": {
+        "size_mib": {
+          "type": "integer"
+        },
+        "defer": {
+          "$ref": "#/definitions/diskid_defer"
+        }
+      }
+    },
+    "inline_response_200_11": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "cluster": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string"
+        },
+        "ip_addr": {
+          "type": "string"
+        }
+      }
+    },
+    "node_run_script_params": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_12": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "ImageCopyParams": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_13": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "task": {
+          "type": "integer"
+        }
+      }
+    },
+    "inline_response_200_14_list": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "date_create": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object",
+          "properties": {}
+        },
+        "user": {
+          "type": "string"
+        }
+      }
+    },
+    "inline_response_200_14": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inline_response_200_14_list"
+          }
+        }
+      }
+    },
+    "HetznerNodeIpList_list": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "$ref": "#/definitions/IdName"
+        },
+        "ip": {
+          "$ref": "#/definitions/IpWithState"
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubnetWithUsedIp"
+        }
+      }
+    },
+    "HostParams_interfaces": {
+      "type": "object",
+      "properties": {
+        "cluster_interface": {
+          "type": "integer"
+        },
+        "ipv4_number": {
+          "type": "number"
+        },
+        "ipv4_pool": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "Host_ip4": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        }
+      }
+    },
+    "Host_interfaces": {
+      "type": "object",
+      "properties": {
+        "host_interface": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "node_interface": {
+          "type": "integer"
+        }
+      }
+    },
+    "Host_disk": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "disk_mib": {
+          "type": "integer"
+        },
+        "disk_mib_new": {
+          "type": "integer"
+        }
+      }
+    },
+    "HostResourceParams_defer": {
+      "type": "object",
+      "properties": {
+        "action": {}
+      }
+    },
+    "SshKeysList_list": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ssh_key": {
+          "type": "string"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "IppoolClusterParams_clusters": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "interface": {
+          "type": "integer"
+        }
+      }
+    },
+    "ClusterSettings_model": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ClusterParams_interfaces": {
+      "type": "object",
+      "required": [
+        "interface",
+        "ippool"
+      ],
+      "properties": {
+        "interface": {
+          "type": "integer"
+        },
+        "ippool": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ClusterParams_storage": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "ceph",
+            "file",
+            "lvm"
+          ]
+        },
+        "volume_group": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "vm_storage_path": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "ignore_checks": {
+          "type": "boolean"
+        },
+        "ip_addr": {
+          "type": "string"
+        },
+        "ssh_port": {
+          "type": "integer"
+        }
+      }
+    },
+    "NodeScriptParams_account": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "NodeScriptParams_updated_at": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/NodeScriptParams_account"
+        }
+      }
+    },
+    "LicenseData_license": {
+      "type": "object",
+      "properties": {
+        "license_ttl": {
+          "type": "integer"
+        },
+        "signature_ttl": {
+          "type": "integer"
+        },
+        "valid": {
+          "type": "boolean"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "NodeParams_interfaces": {
+      "type": "object",
+      "properties": {
+        "node_interface": {
+          "type": "string"
+        },
+        "cluster_interface": {
+          "type": "integer"
+        }
+      }
+    },
+    "Node_interfaces": {
+      "type": "object",
+      "properties": {
+        "node_interface": {
+          "type": "string"
+        },
+        "network_switch": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
