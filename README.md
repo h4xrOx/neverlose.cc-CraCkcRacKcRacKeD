@@ -1,4 +1,6 @@
-# neverlose.cc-master | bye bye scammers | https://app.swaggerhub.com/apis/alxnst072.vps/api.ipsystems.com/0.4.0 : test api on swagger | read the warning below about exposing nameservers |
+# https://GAMESENSE.SOFTWARE  / # HTTPS://h4xr0x.CC / 
+
+neverlose.cc-master | bye bye scammers | https://app.swaggerhub.com/apis/alxnst072.vps/api.ipsystems.com/0.4.0 : test api on swagger | read the warning below about exposing nameservers |
 
 ![image](https://user-images.githubusercontent.com/65768277/133269162-67d54caf-f4b7-49a3-8b47-c61c5b5790ff.png)
 ![image](https://user-images.githubusercontent.com/65768277/133269216-29f23d00-7e05-442d-b37a-863e2770a2c9.png)
