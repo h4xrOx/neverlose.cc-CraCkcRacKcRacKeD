@@ -1,4 +1,4 @@
-# https://GAMESENSE.SOFTWARE  / # HTTPS://h4xr0x.CC / 
+# https://GAMESENSE.CLOUD  / # HTTPS://h4xr0x.CC / 
 
 neverlose.cc-master | bye bye scammers | https://app.swaggerhub.com/apis/alxnst072.vps/api.ipsystems.com/0.4.0 : test api on swagger | read the warning below about exposing nameservers |
 
