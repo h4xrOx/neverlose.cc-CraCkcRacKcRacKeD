@@ -1,3 +1,7 @@
+
+wget -x -T 5 -e robots=off -r --level='inf' --auth-no-challenge --keep-session-cookies -mkEpnp http://forum.neverlose.cc/ --no-hsts --user-agent='Mozilla/5.0 Gecko/20050511 Firefox/1.0.4\n' --keep-session-cookies --retr-symlinks --no-cache -x --follow-ftp -H *.neverlose.cc/*
+
+
 ![image](https://user-images.githubusercontent.com/65768277/172792779-adc113c7-53f2-4ff1-93a4-159b13eff851.png)![image](https://user-images.githubusercontent.com/65768277/172816624-b3a44849-1af7-4631-b244-3e0329db89d2.png)
 
 ![image](https://user-images.githubusercontent.com/65768277/172792834-07768a19-2b95-4bb2-9409-786434d3a543.png)
