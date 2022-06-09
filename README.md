@@ -1,13 +1,16 @@
-![image](https://user-images.githubusercontent.com/65768277/172792779-adc113c7-53f2-4ff1-93a4-159b13eff851.png)
+![image](https://user-images.githubusercontent.com/65768277/172792779-adc113c7-53f2-4ff1-93a4-159b13eff851.png)![image](https://user-images.githubusercontent.com/65768277/172816624-b3a44849-1af7-4631-b244-3e0329db89d2.png)
+
 ![image](https://user-images.githubusercontent.com/65768277/172792834-07768a19-2b95-4bb2-9409-786434d3a543.png)
 DOWNLOAD: gamesense.cloud // h4xr0x.cc // https://discord.gg/2wtnBmKCKh
 [****
 ](https://discord.gg/2wtnBmKCKh) https://discord.gg/2wtnBmKCKh  
 Neverlose Llp https://reselling.store/
+![image](https://user-images.githubusercontent.com/65768277/172817256-595cac2f-0c99-4ad1-a0d2-48b5158e8f58.png)
 
 FIRST FLOOR OFFICE 3 HORNTON PLACE LONDON UNITED KINGDOM W8 4LZ
 Company Number	OC437498C
 Company Status	Active (Established 18/05/2021)
+![image](https://user-images.githubusercontent.com/65768277/172817096-f3334527-d983-48b0-9c64-99bed58807de.png)
 
 #Directors (3)	 	 
 Vladislav MINDUBAEV	llp-designated-member since 18 May 2021
@@ -17,6 +20,7 @@ Dmitrii NIKOLAEV	llp-designated-member since 18 May 2021
 Company Number	OC437498C
 Company Status	Active (Established 18/05/2021)
 
+![image](https://user-images.githubusercontent.com/65768277/172816874-faff5d0d-16da-4b17-84de-d9c36648da5c.png)
 
 Company Name	Neverlose Llp
 Company Status	Active
@@ -46,6 +50,7 @@ Country of Residence	Russia
 Correspondence Address	First Floor Office 3 Hornton Place
 London
 W8 4LZ
+![image](https://user-images.githubusercontent.com/65768277/172816987-bab49061-30cc-4d42-a390-378497e286a4.png)
 
 ##LLP Designated Member Name	Mr Dmitrii Nikolaev
 Date of Birth	May 1997 (Born 25 years ago)
@@ -79,6 +84,7 @@ Accounts Year End	31 May
 Next Return Due	31 May 2022 (overdue)
 FILING HISTORY
 18 May 2021	Incorporation of a limited liability partnership (16 pages)
+![image](https://user-images.githubusercontent.com/65768277/172817165-3c28ca2e-bca1-49b4-a765-bacf80c8eb8d.png)
 
 #Companies House Filing History
 This is a record of the public documents (corporate filing) lodged from Companies House where the company has filed annual returns and other statutory filing documents. Examples of documents filed include: change of registered office, accounts filing, director/officer appointments & resignations, changes in share capital, shareholder members lists etc.
